@@ -7,6 +7,13 @@ terraform {
     }
 }
 
+// Environment Varaible should be used for authentication instead of the Provider Block
+//
+//provider "netskope" {
+//        	baseurl = "https://<tenant-url>.goskope.com"
+//        	apitoken = "<api token>"
+//}
+
 
 resource "netskope_publishers" "Publisher" {
   name = "Example-Publisher"
