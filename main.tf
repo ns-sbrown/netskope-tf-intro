@@ -7,39 +7,17 @@ terraform {
     }
 }
 
-// Environment Varaible should be used for authentication instead of the Provider Block
-//
-//provider "netskope" {
-//        	baseurl = "https://<tenant-url>.goskope.com"
-//        	apitoken = "<api token>"
-//}
-
-
-resource "netskope_publishers" "Publisher" {
-  name = "Example-Publisher"
+provider "aws" {
+  region = "us-west-1"
 }
 
+module "aws_publisher" {
+  source = "github.com/ns-sbrown/terraform-netskope-publisher-aws"
 
-output "publisher_details" {
-  value = {
-    name  = "${netskope_publishers.Publisher.name}"
-    token = "${netskope_publishers.Publisher.token}"
-  }
-}
-
-
-resource "netskope_privateapps" "PrivateApp" {
-  app_name = "Eaxmple-Private-App"
-  host     = "site.example.internal"
-
-  protocols {
-    type = "tcp"
-    port = "22, 443, 8080-8081"
-  }
-
-  publisher {
-    publisher_id   = netskope_publishers.Publisher.id
-    publisher_name = netskope_publishers.Publisher.name
-  }
+  publisher_name              = var.publisher_name
+  aws_key_name                = var.aws_key_name
+  aws_subnet                  = var.aws_subnet_id
+  aws_security_group          = var.aws_sg_id
+  associate_public_ip_address = var.associate_public_ip_address
 
 }
