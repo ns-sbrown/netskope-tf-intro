@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-west-1"
 }
 
-module "puboisher-aws" {
+module "publisher-aws" {
   source  = "netskopeoss/publisher-aws/netskope"
 
   publisher_name              = var.publisher_name
