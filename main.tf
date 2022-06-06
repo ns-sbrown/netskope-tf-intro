@@ -1,18 +1,9 @@
-terraform {
-    required_providers {
-        netskope = {
-        version = "0.2.0"
-        source  = "github.com/netskopeoss/netskope"
-        }
-    }
-}
-
 provider "aws" {
   region = "us-west-1"
 }
 
-module "aws_publisher" {
-  source = "github.com/ns-sbrown/terraform-netskope-publisher-aws"
+module "puboisher-aws" {
+  source  = "netskopeoss/publisher-aws/netskope"
 
   publisher_name              = var.publisher_name
   aws_key_name                = var.aws_key_name
